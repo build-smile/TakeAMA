@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:take_ama/pages/client/caretakerCard.dart';
+import 'package:take_ama/pages/client/caretakerDetail.dart';
 import 'package:take_ama/pages/client/home.dart';
-import 'package:take_ama/pages/employee/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        "/caretaker": (context) => CaretakerCardPage(),
+        "/caretakerDetail": (context) => CaretakerDetailPage(),
+      },
       home: ClientHome(),
     );
   }

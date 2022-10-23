@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:take_ama/pages/client/CaretakerCard.dart';
+import 'package:take_ama/pages/client/caretakerCard.dart';
+import 'package:take_ama/pages/client/myCaretaker.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({Key? key}) : super(key: key);
@@ -11,12 +12,15 @@ class ClientHome extends StatefulWidget {
 class _ClientHomeState extends State<ClientHome> {
   String fullName = "John Doe";
   int pageIndex = 0;
-  List<dynamic> pages = [const CaretakerCardPage()];
+  List<dynamic> pages = [
+    const CaretakerCardPage(),
+    const MyCareTaker(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Ama'),
+        title: Text('Take AMA'),
       ),
       body: pages[pageIndex],
       drawer: Drawer(
@@ -45,10 +49,23 @@ class _ClientHomeState extends State<ClientHome> {
               ),
             ),
             ListTile(
+              onTap: () {
+                _selectChange(0);
+              },
+              selected: pageIndex == 0,
               leading: Icon(Icons.search),
               title: Text('Find Caretaker'),
             ),
             ListTile(
+              onTap: () {
+                _selectChange(1);
+              },
+              selected: pageIndex == 1,
+              leading: Icon(Icons.my_library_books),
+              title: Text('My Caretaker'),
+            ),
+            ListTile(
+              selected: pageIndex == 2,
               leading: Icon(Icons.logout),
               title: Text('Logout'),
             )
@@ -56,5 +73,12 @@ class _ClientHomeState extends State<ClientHome> {
         ),
       ),
     );
+  }
+
+  _selectChange(int index) {
+    setState(() {
+      pageIndex = index;
+      Navigator.pop(context);
+    });
   }
 }
