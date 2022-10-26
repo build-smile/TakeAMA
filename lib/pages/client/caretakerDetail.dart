@@ -8,6 +8,7 @@ class CaretakerDetailPage extends StatefulWidget {
 }
 
 class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
+  var txtAmount = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,14 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
           Container(
             padding: EdgeInsets.all(20),
             child: TextFormField(
+              onChanged: (String? v) {
+                v = v ?? "";
+                if (int.tryParse(v) != null) {
+                  double amount = double.parse(v) * 300;
+                  txtAmount.text = '$amount';
+                  setState(() {});
+                }
+              },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: "จำนวนชั่วโมง",
@@ -44,17 +53,17 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
           Container(
             padding: EdgeInsets.all(20),
             child: TextFormField(
+              controller: txtAmount,
               readOnly: true,
-              decoration: InputDecoration(
-                hintText: "0 บาท",
-              ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Text("Confirm"),
               ),
             ],

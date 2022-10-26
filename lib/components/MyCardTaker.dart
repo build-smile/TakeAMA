@@ -12,6 +12,7 @@ class MyCardTaker extends StatelessWidget {
         children: [
           Text("12/12/2022"),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("สุพจน์ ใจร่ม"),
