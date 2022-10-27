@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Memo(labelDetail: labelDetail, user: user),
               TextFormField(
-                validator: ValidateField.validateString,
+                validator: ValidateField.validateYear,
                 onSaved: (String? value) {
                   user.firstName = value!;
                 },

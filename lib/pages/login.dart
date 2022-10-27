@@ -21,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Container(
             margin: EdgeInsets.all(50),
-            child: FlutterLogo(),
             width: 150,
             height: 150,
+            child: Image.asset("assets/images/disabled.png"),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Form(
             key: _keyForm,
