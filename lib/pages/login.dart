@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/validatefield.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -8,8 +10,71 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String username = "";
+  String password = "";
+  var _keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+          child: ListView(
+        children: [
+          Container(
+            margin: EdgeInsets.all(50),
+            child: FlutterLogo(),
+            width: 150,
+            height: 150,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Form(
+            key: _keyForm,
+            child: Column(
+              children: [
+                ListTile(
+                  title: TextFormField(
+                    validator: ValidateField.validateString,
+                    onSaved: (String? value) {
+                      username = value!;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Username', hintText: 'Username'),
+                  ),
+                ),
+                ListTile(
+                  title: TextFormField(
+                    obscureText: true,
+                    validator: ValidateField.validateString,
+                    onSaved: (String? value) {
+                      password = value!;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Password', hintText: 'Password'),
+                  ),
+                ),
+                ListTile(
+                  title: ElevatedButton(
+                    child: Text('Login'),
+                    onPressed: () {
+                      if (_keyForm.currentState!.validate()) {
+                        _keyForm.currentState!.save();
+                        submit(username, password);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/register'),
+            child: Text('Need an Account'),
+          )
+        ],
+      )),
+    );
   }
+
+  void submit(username, password) {}
 }
