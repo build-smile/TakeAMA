@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/models/User.dart';
 
+import '../services/UserAPI.dart';
+import '../utils/SnackBarHelper.dart';
 import '../utils/validatefield.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -18,8 +20,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String labelPassword = "Password";
   String labelConfirmPassword = "Confirm password";
   String labelEmail = "Email";
-  String labelDetail = "Detail";
-  String labelBirthday = "Birthday";
+  String labelDetail = "About me";
+  String labelBirthday = "Birthday (Year)";
 
   var _keyform = GlobalKey<FormState>();
   @override
@@ -65,9 +67,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               TextFormField(
+                obscureText: true,
                 validator: ValidateField.validateString,
                 onSaved: (String? value) {
-                  user.firstName = value!;
+                  user.password = value!;
                 },
                 decoration: InputDecoration(
                   labelText: labelPassword,
@@ -75,10 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               TextFormField(
+                obscureText: true,
                 validator: ValidateField.validateString,
-                onSaved: (String? value) {
-                  user.firstName = value!;
-                },
                 decoration: InputDecoration(
                   labelText: labelConfirmPassword,
                   hintText: labelConfirmPassword,
@@ -87,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextFormField(
                 validator: ValidateField.validateString,
                 onSaved: (String? value) {
-                  user.firstName = value!;
+                  user.email = value!;
                 },
                 decoration: InputDecoration(
                   labelText: labelEmail,
@@ -96,20 +97,23 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Memo(labelDetail: labelDetail, user: user),
               TextFormField(
+                keyboardType: TextInputType.number,
                 validator: ValidateField.validateYear,
                 onSaved: (String? value) {
-                  user.firstName = value!;
+                  user.birthDay = int.parse(value!);
                 },
                 decoration: InputDecoration(
                   labelText: labelBirthday,
                   hintText: labelBirthday,
                 ),
               ),
-              ListTile(
-                title: ElevatedButton(
-                  onPressed: _register,
-                  child: Text('submit'),
-                ),
+              RadioUserType(submit: onChangeTypeUser),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: _register,
+                child: Text('submit'),
               )
             ],
           ),
@@ -118,8 +122,17 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  _register() {
-    if (_keyform.currentState!.validate()) {}
+  onChangeTypeUser(int v) {
+    user.userType = v;
+  }
+
+  _register() async {
+    if (_keyform.currentState!.validate()) {
+      _keyform.currentState!.save();
+      String res = await UserAPI.register(user);
+      Alert.show(context: context, msg: res);
+      Navigator.pop(context);
+    }
   }
 }
 
@@ -135,23 +148,79 @@ class Memo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.all(5),
+            child: Text(
+              labelDetail,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextFormField(
+            maxLines: 5,
+            validator: ValidateField.validateString,
+            onSaved: (String? value) {
+              user.detail = value!;
+            },
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+enum SingingCharacter { customer, careTaker }
+
+class RadioUserType extends StatefulWidget {
+  final Function submit;
+  const RadioUserType({super.key, required this.submit});
+
+  @override
+  State<RadioUserType> createState() => _RadioUserTypeState();
+}
+
+class _RadioUserTypeState extends State<RadioUserType> {
+  SingingCharacter? _character = SingingCharacter.customer;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.all(5),
-          child: Text(labelDetail),
+      children: <Widget>[
+        ListTile(
+          title: const Text('Customer'),
+          leading: Radio<SingingCharacter>(
+            value: SingingCharacter.customer,
+            groupValue: _character,
+            onChanged: (SingingCharacter? value) {
+              setState(() {
+                _character = value;
+                widget.submit(1);
+              });
+            },
+          ),
         ),
-        TextFormField(
-          maxLines: 5,
-          validator: ValidateField.validateString,
-          onSaved: (String? value) {
-            user.firstName = value!;
-          },
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+        ListTile(
+          title: const Text('Care Taker'),
+          leading: Radio<SingingCharacter>(
+            value: SingingCharacter.careTaker,
+            groupValue: _character,
+            onChanged: (SingingCharacter? value) {
+              setState(() {
+                widget.submit(2);
+                _character = value;
+              });
+            },
           ),
         ),
       ],

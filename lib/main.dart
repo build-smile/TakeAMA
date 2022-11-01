@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         "/register": (context) => RegisterPage(),
         "/caretaker": (context) => CaretakerCardPage(),
         "/caretakerDetail": (context) => CaretakerDetailPage(),
+        "/client-home": (context) => ClientHome()
       },
       home: LoginPage(),
     );

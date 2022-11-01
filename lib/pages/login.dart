@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:take_ama/services/UserAPI.dart';
+import 'package:take_ama/utils/SnackBarHelper.dart';
+import '../models/UserLogin.dart';
 import '../utils/validatefield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -12,7 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String username = "";
   String password = "";
-  var _keyForm = GlobalKey<FormState>();
+  final _keyForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                     onSaved: (String? value) {
                       username = value!;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: 'Username', hintText: 'Username'),
                   ),
                 ),
@@ -49,13 +50,13 @@ class _LoginPageState extends State<LoginPage> {
                     onSaved: (String? value) {
                       password = value!;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: 'Password', hintText: 'Password'),
                   ),
                 ),
                 ListTile(
                   title: ElevatedButton(
-                    child: Text('Login'),
+                    child: const Text('Login'),
                     onPressed: () {
                       if (_keyForm.currentState!.validate()) {
                         _keyForm.currentState!.save();
@@ -69,12 +70,28 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextButton(
             onPressed: () => Navigator.pushNamed(context, '/register'),
-            child: Text('Need an Account'),
+            child: const Text('Need an Account'),
           )
         ],
       )),
     );
   }
 
-  void submit(username, password) {}
+  void submit(username, password) async {
+    if (_keyForm.currentState!.validate()) {
+      _keyForm.currentState!.save();
+      UserLogin? userLogin =
+          await UserAPI.login(username: username, password: password);
+      if (userLogin != null) {
+        Alert.show(context: context, msg: userLogin.message!);
+        if ('${userLogin.data!.userType}' == "1") {
+          Navigator.pushNamed(context, "/client-home");
+        } else {
+          Navigator.pushNamed(context, "/client-home");
+        }
+      } else {
+        Alert.show(context: context, msg: "Something went wrong");
+      }
+    }
+  }
 }
