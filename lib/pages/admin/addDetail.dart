@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/models/User.dart';
-import '../services/UserAPI.dart';
-import '../utils/SnackBarHelper.dart';
-import '../utils/validatefield.dart';
+
+import '../../services/UserAPI.dart';
+import '../../utils/SnackBarHelper.dart';
+import '../../utils/validatefield.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

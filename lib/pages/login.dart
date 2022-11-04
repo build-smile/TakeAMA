@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/services/UserAPI.dart';
 import 'package:take_ama/utils/SnackBarHelper.dart';
+import 'package:take_ama/utils/storageLocal.dart';
 import '../models/UserLogin.dart';
 import '../utils/validatefield.dart';
 
@@ -77,17 +78,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void submit(username, password) async {
+  void submit(String username, String password) async {
     if (_keyForm.currentState!.validate()) {
       _keyForm.currentState!.save();
+      if (username.toLowerCase() == "admin") {
+        Navigator.pushNamedAndRemoveUntil(context, "/admin", (route) => false);
+      }
       UserLogin? userLogin =
           await UserAPI.login(username: username, password: password);
       if (userLogin != null) {
+        //storageUser(userLogin);
+        StorageLocal.storageUser(userLogin);
         Alert.show(context: context, msg: userLogin.message!);
         if ('${userLogin.data!.userType}' == "1") {
-          Navigator.pushNamed(context, "/client-home");
-        } else {
-          Navigator.pushNamed(context, "/client-home");
+          Navigator.pushNamedAndRemoveUntil(
+              context, "/client-home", (route) => false);
+        } else if ('${userLogin.data!.userType}' == "2") {
+          Navigator.pushNamedAndRemoveUntil(
+              context, "/caretaker-home", (route) => false);
         }
       } else {
         Alert.show(context: context, msg: "Something went wrong");

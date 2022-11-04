@@ -13,7 +13,7 @@ class User {
     this.username = "",
     this.password = "",
     this.email = "",
-    this.userType = 0,
+    this.userType = "",
     this.firstName = "",
     this.lastName = "",
     this.detail = "",
@@ -23,7 +23,7 @@ class User {
   String username;
   String password;
   String email;
-  int userType;
+  String userType;
   String firstName;
   String lastName;
   String detail;

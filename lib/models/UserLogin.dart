@@ -15,11 +15,11 @@ class UserLogin {
   });
 
   String? message;
-  Data? data;
+  Profile? data;
 
   factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: Profile.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,10 +28,11 @@ class UserLogin {
       };
 }
 
-class Data {
-  Data({
+class Profile {
+  Profile({
     this.id,
     this.username,
+    this.detail,
     this.email,
     this.userType,
     this.firstName,
@@ -43,15 +44,17 @@ class Data {
   String? id;
   String? username;
   String? email;
+  String? detail;
   String? userType;
   String? firstName;
   String? lastName;
   String? birthDay;
   String? isActive;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
         id: json["id"],
         username: json["username"],
+        detail: json["detail"],
         email: json["email"],
         userType: json["userType"],
         firstName: json["firstName"],
