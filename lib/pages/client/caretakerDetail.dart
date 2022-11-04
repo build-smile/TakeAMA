@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:take_ama/models/UserLogin.dart';
 
 class CaretakerDetailPage extends StatefulWidget {
   const CaretakerDetailPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
   var txtAmount = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Profile profile = ModalRoute.of(context)!.settings.arguments as Profile;
     return Scaffold(
       appBar: AppBar(
         title: Text('CareTaker'),
@@ -23,14 +25,13 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
           Container(
             padding: EdgeInsets.all(20),
             child: Text(
-              "Name: สมศรี จันทร์เรือง",
+              "Name: ${profile.firstName} ${profile.lastName}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Container(
             padding: EdgeInsets.all(20),
-            child: Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+            child: Text(profile.detail ?? ''),
           ),
           Container(
             padding: EdgeInsets.all(20),
