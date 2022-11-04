@@ -25,4 +25,23 @@ class OrderAPI {
     }
     return "Something went wrong";
   }
+
+  static Future<String> update(Order order) async {
+    var urlRegister = Uri.parse('$url/api/order/update.php');
+    var response = await http.post(
+      urlRegister,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      encoding: Encoding.getByName('utf-8'),
+      body: jsonEncode(
+        {"orderId": 12, "status": 2},
+      ),
+    );
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      return result["message"];
+    }
+    return "Something went wrong";
+  }
 }
