@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/pages/client/caretakerCard.dart';
 import 'package:take_ama/pages/client/myCaretaker.dart';
+import 'package:take_ama/utils/storageLocal.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({Key? key}) : super(key: key);
@@ -38,12 +40,24 @@ class _ClientHomeState extends State<ClientHome> {
                       size: 50,
                     ),
                   ),
-                  Text(
-                    fullName,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
+                  FutureBuilder(
+                    future: StorageLocal.getUser(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Profile?> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      Profile profile = snapshot.data!;
+                      return Text(
+                        '${profile.firstName} ${profile.lastName}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -68,6 +82,7 @@ class _ClientHomeState extends State<ClientHome> {
               selected: pageIndex == 2,
               leading: Icon(Icons.logout),
               title: Text('Logout'),
+              onTap: _logout,
             )
           ],
         ),
@@ -80,5 +95,10 @@ class _ClientHomeState extends State<ClientHome> {
       pageIndex = index;
       Navigator.pop(context);
     });
+  }
+
+  _logout() {
+    StorageLocal.clearUser();
+    Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
   }
 }
