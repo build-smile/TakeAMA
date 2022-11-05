@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:take_ama/models/UserLogin.dart';
 
+Profile? globalProfile;
+
 class StorageLocal {
   static Future<String?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -69,6 +71,7 @@ class StorageLocal {
     profile.username = await StorageLocal.getUsername();
     profile.firstName = await StorageLocal.getFirstname();
     profile.lastName = await StorageLocal.getLastname();
+    globalProfile = profile;
     return profile;
   }
 

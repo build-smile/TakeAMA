@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/pages/careTaker/setting.dart';
 import 'myOrder.dart';
-import 'orderDetail.dart';
+import 'myOrderDetail.dart';
 
 class CareTakerHome extends StatefulWidget {
   const CareTakerHome({super.key});
@@ -11,11 +11,7 @@ class CareTakerHome extends StatefulWidget {
 
 class _CareTakerHomeState extends State<CareTakerHome> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    OrderDetail(),
-    MyOrder(),
-    SettingPage()
-  ];
+  static const List<Widget> _widgetOptions = <Widget>[MyOrder(), SettingPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,10 +30,6 @@ class _CareTakerHomeState extends State<CareTakerHome> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.inbox),
             label: 'My Order',

@@ -50,14 +50,14 @@ class _CaretakerCardPageState extends State<CaretakerCardPage> {
                             children: [
                               Text(
                                 '${caretaker.firstName} ${caretaker.lastName}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
                                 ),
                               ),
                               Text(
                                 '${DateTime.now().year - int.parse(caretaker.birthDay!)} Year',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                 ),
                               ),
@@ -65,7 +65,7 @@ class _CaretakerCardPageState extends State<CaretakerCardPage> {
                                 onPressed: () {
                                   _selectCareTaker(caretaker);
                                 },
-                                child: Text("Select"),
+                                child: const Text("Select"),
                               )
                             ],
                           ),
@@ -75,11 +75,11 @@ class _CaretakerCardPageState extends State<CaretakerCardPage> {
                   );
                 },
                 itemCount: caretakers.length,
-                pagination: SwiperPagination(),
-                control: SwiperControl(),
+                pagination: const SwiperPagination(),
+                control: const SwiperControl(),
               );
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }),
     );
   }

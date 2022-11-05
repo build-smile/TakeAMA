@@ -6,14 +6,17 @@ class ValidateField {
     return null;
   }
 
-  static String? validateYear(String? v) {
+  static String? validateNumber(String? v) {
     if (v == null || v == "") {
       return "Please fill data";
     }
-    if (int.tryParse(v) == null) {
+    if (double.tryParse(v) == null) {
       return "invalid number";
     }
 
+    if (double.parse(v) <= 0) {
+      return "number must more than 0";
+    }
     return null;
   }
 }

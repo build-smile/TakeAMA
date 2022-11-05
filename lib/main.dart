@@ -3,6 +3,7 @@ import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/pages/admin/editDetail.dart';
 import 'package:take_ama/pages/admin/home.dart';
 import 'package:take_ama/pages/careTaker/home.dart';
+import 'package:take_ama/pages/careTaker/myOrderDetail.dart';
 import 'package:take_ama/pages/client/caretakerCard.dart';
 import 'package:take_ama/pages/client/caretakerDetail.dart';
 import 'package:take_ama/pages/client/home.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         "/caretaker-home": (context) => CareTakerHome(),
         "/login": (context) => LoginPage(),
         "/admin": (context) => AdminHomePage(),
-        "/detail": (context) => EditDetailPage()
+        "/detail": (context) => EditDetailPage(),
+        "/myOrderDetail": (context) => MyOrderDetail()
       },
       home: FutureBuilder(
         future: StorageLocal.getUser(),
