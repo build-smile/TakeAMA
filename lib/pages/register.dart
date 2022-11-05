@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
-                validator: ValidateField.validateYear,
+                validator: ValidateField.validateNumber,
                 onSaved: (String? value) {
                   user.birthDay = int.parse(value!);
                 },

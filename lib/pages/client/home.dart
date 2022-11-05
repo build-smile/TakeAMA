@@ -22,18 +22,18 @@ class _ClientHomeState extends State<ClientHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take AMA'),
+        title: const Text('Take AMA'),
       ),
       body: pages[pageIndex],
       drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: const BoxDecoration(color: Colors.blue),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
                     child: Icon(
                       Icons.person_outline,
@@ -45,14 +45,14 @@ class _ClientHomeState extends State<ClientHome> {
                     builder: (BuildContext context,
                         AsyncSnapshot<Profile?> snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
                       Profile profile = snapshot.data!;
                       return Text(
                         '${profile.firstName} ${profile.lastName}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
@@ -67,21 +67,21 @@ class _ClientHomeState extends State<ClientHome> {
                 _selectChange(0);
               },
               selected: pageIndex == 0,
-              leading: Icon(Icons.search),
-              title: Text('Find Caretaker'),
+              leading: const Icon(Icons.search),
+              title: const Text('Find Caretaker'),
             ),
             ListTile(
               onTap: () {
                 _selectChange(1);
               },
               selected: pageIndex == 1,
-              leading: Icon(Icons.my_library_books),
-              title: Text('My Caretaker'),
+              leading: const Icon(Icons.my_library_books),
+              title: const Text('My Caretaker'),
             ),
             ListTile(
               selected: pageIndex == 2,
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
               onTap: _logout,
             )
           ],
