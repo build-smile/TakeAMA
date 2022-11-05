@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/models/Order.dart';
 import 'package:take_ama/services/OrderAPI.dart';
+import 'package:take_ama/utils/storageLocal.dart';
 
 class MyOrderDetail extends StatefulWidget {
   const MyOrderDetail({Key? key}) : super(key: key);
@@ -15,12 +16,13 @@ class _MyOrderDetailState extends State<MyOrderDetail> {
     OrderDetail order =
         ModalRoute.of(context)!.settings.arguments as OrderDetail;
     return Scaffold(
-      appBar: AppBar(title: Text('Status')),
+      appBar: AppBar(title: const Text('Status')),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Visibility(
-            visible: order.id != '1',
+            visible: order.orderStatus == 'pending' &&
+                globalProfile!.userType == '2',
             child: ElevatedButton(
               child: const Text('Accept'),
               onPressed: () {

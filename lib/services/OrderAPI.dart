@@ -5,7 +5,7 @@ import '../models/Order.dart';
 class OrderAPI {
   static String url = "http://take-ama.cckcoder.cc";
 
-  static Future<String> create(Order order) async {
+  static Future<String> create(OrderDetail order, String amaId) async {
     var urlRegister = Uri.parse('$url/api/order/create.php');
     var response = await http.post(
       urlRegister,
@@ -14,10 +14,10 @@ class OrderAPI {
       },
       encoding: Encoding.getByName('utf-8'),
       body: jsonEncode({
-        "careTakerId": 8,
-        "hours": 3,
-        "price": 1500,
-        "amaId": 13,
+        "careTakerId": order.careTaker,
+        "hours": order.hours,
+        "price": order.price,
+        "amaId": amaId,
       }),
     );
     if (response.statusCode == 200) {

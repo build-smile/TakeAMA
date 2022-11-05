@@ -25,7 +25,7 @@ class _MyCareTakerState extends State<MyCareTaker> {
         OrderDetail orderDetail = snapshot.data!;
         return ListTile(
           leading: const Icon(Icons.person),
-          title: Text('${orderDetail.amaName!} ${orderDetail.hours} ชั่วโมง'),
+          title: Text('${orderDetail.careTaker!} ${orderDetail.hours} ชั่วโมง'),
           subtitle: Text('${orderDetail.price} บาท'),
           trailing: Text(orderDetail.orderStatus!),
           onTap: () {
