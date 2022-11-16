@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/pages/admin/editDetail.dart';
-import 'package:take_ama/pages/admin/home.dart';
+import 'package:take_ama/pages/admin/news.dart';
+import 'package:take_ama/pages/admin/user.dart';
+import 'package:take_ama/pages/admin/menu.dart';
 import 'package:take_ama/pages/careTaker/home.dart';
 import 'package:take_ama/pages/client/caretakerCard.dart';
 import 'package:take_ama/pages/client/caretakerDetail.dart';
@@ -27,8 +29,10 @@ class MyApp extends StatelessWidget {
         "/client-home": (context) => ClientHome(),
         "/caretaker-home": (context) => CareTakerHome(),
         "/login": (context) => LoginPage(),
-        "/admin": (context) => AdminHomePage(),
-        "/detail": (context) => EditDetailPage()
+        "/user-admin": (context) => UserPage(),
+        "/detail": (context) => EditDetailPage(),
+        "/menu-admin": (context) => MenuPage(),
+        "/news-admin": (context) => NewsPage()
       },
       home: FutureBuilder(
         future: StorageLocal.getUser(),

@@ -72,7 +72,7 @@ class StorageLocal {
     return profile;
   }
 
-  static void storageUser(UserLogin userLogin) {
+  static Future<void> storageUser(UserLogin userLogin) async {
     StorageLocal.setUserId(userLogin.data!.id!);
     StorageLocal.setUserType(userLogin.data!.userType!);
     StorageLocal.setUsername(userLogin.data!.username!);
