@@ -81,7 +81,7 @@ class _EditDetailPageState extends State<EditDetailPage> {
               TextFormField(
                 initialValue: profile.birthDay,
                 keyboardType: TextInputType.number,
-                validator: ValidateField.validateYear,
+                validator: ValidateField.validateNumber,
                 onSaved: (String? value) {
                   profile.birthDay = value;
                 },

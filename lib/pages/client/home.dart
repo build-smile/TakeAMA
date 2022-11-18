@@ -24,18 +24,18 @@ class _ClientHomeState extends State<ClientHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take AMA'),
+        title: const Text('Take AMA'),
       ),
       body: pages[pageIndex],
       drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: const BoxDecoration(color: Colors.blue),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
                     child: Icon(
                       Icons.person_outline,
@@ -47,14 +47,14 @@ class _ClientHomeState extends State<ClientHome> {
                     builder: (BuildContext context,
                         AsyncSnapshot<Profile?> snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
                       Profile profile = snapshot.data!;
                       return Text(
                         '${profile.firstName} ${profile.lastName}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
