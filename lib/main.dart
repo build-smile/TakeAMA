@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/pages/admin/addNews.dart';
 import 'package:take_ama/pages/admin/editDetail.dart';
+import 'package:take_ama/pages/admin/editNews.dart';
 import 'package:take_ama/pages/admin/news.dart';
 import 'package:take_ama/pages/admin/user.dart';
 import 'package:take_ama/pages/admin/menu.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         "/detail": (context) => const EditDetailPage(),
         "/menu-admin": (context) => const MenuPage(),
         "/news-admin": (context) => const NewsPage(),
-        "/add-news": (context) => const AddNews()
+        "/add-news": (context) => const AddNews(),
+        "/edit-news": (context) => const EditNews()
       },
       home: FutureBuilder(
         future: StorageLocal.getUser(),
