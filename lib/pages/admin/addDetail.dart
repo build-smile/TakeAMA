@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String labelDetail = "About me";
   String labelBirthday = "Birthday (Year)";
 
-  var _keyform = GlobalKey<FormState>();
+  final _keyform = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -9,23 +9,19 @@ UserLogin userLoginFromJson(String str) => UserLogin.fromJson(json.decode(str));
 String userLoginToJson(UserLogin data) => json.encode(data.toJson());
 
 class UserLogin {
-  UserLogin({
-    this.message,
-    this.data,
-  });
+  UserLogin({this.message, this.data, this.status});
 
   String? message;
   Profile? data;
+  String? status;
 
   factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
-        message: json["message"],
-        data: Profile.fromJson(json["data"]),
-      );
+      message: json["message"],
+      data: Profile.fromJson(json["data"]),
+      status: json["status"]);
 
-  Map<String, dynamic> toJson() => {
-        "message": message,
-        "data": data!.toJson(),
-      };
+  Map<String, dynamic> toJson() =>
+      {"message": message, "data": data!.toJson(), "status": status};
 }
 
 class Profile {
