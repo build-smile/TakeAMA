@@ -19,20 +19,22 @@ class _MyOrderState extends State<MyOrder> {
         builder: (BuildContext context, AsyncSnapshot<OrderDetail?> snapshot) {
           if (snapshot.hasData) {
             OrderDetail orderDetail = snapshot.data!;
-            return ListTile(
-              leading: const Icon(Icons.person),
-              title:
-                  Text('${orderDetail.amaName!} ${orderDetail.hours} ชั่วโมง'),
-              subtitle: Text('${orderDetail.price} บาท'),
-              trailing: Text(orderDetail.orderStatus!),
-              onTap: () {
-                Navigator.pushNamed(context, '/myOrderDetail',
-                        arguments: orderDetail)
-                    .then((value) {
-                  setState(() {});
-                });
-              },
-            );
+            if (orderDetail.id != null) {
+              return ListTile(
+                leading: const Icon(Icons.person),
+                title: Text(
+                    '${orderDetail.amaName!} ${orderDetail.hours} ชั่วโมง'),
+                subtitle: Text('${orderDetail.price} บาท'),
+                trailing: Text(orderDetail.orderStatus!),
+                onTap: () {
+                  Navigator.pushNamed(context, '/myOrderDetail',
+                          arguments: orderDetail)
+                      .then((value) {
+                    setState(() {});
+                  });
+                },
+              );
+            }
           }
           return Center(
               child: Column(

@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
       }
       UserLogin? userLogin =
           await UserAPI.login(username: username, password: password);
-      if (userLogin != null) {
+      if (userLogin!.data != null) {
         await StorageLocal.storageUser(userLogin);
         Alert.show(context: context, msg: userLogin.message!);
         if ('${userLogin.data!.userType}' == "1") {

@@ -17,7 +17,7 @@ class UserLogin {
 
   factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
       message: json["message"],
-      data: Profile.fromJson(json["data"]),
+      data: json["data"] == null ? null : Profile.fromJson(json["data"]),
       status: json["status"]);
 
   Map<String, dynamic> toJson() =>
