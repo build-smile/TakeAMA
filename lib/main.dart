@@ -26,21 +26,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        "/register": (context) => RegisterPage(),
-        "/caretaker": (context) => CaretakerCardPage(),
-        "/caretakerDetail": (context) => CaretakerDetailPage(),
-        "/client-home": (context) => ClientHome(),
-        "/caretaker-home": (context) => CareTakerHome(),
-        "/login": (context) => LoginPage(),
-        "/admin": (context) => AdminHomePage(),
-        "/detail": (context) => EditDetailPage(),
-        "/myOrderDetail": (context) => MyOrderDetail(),
-        "/ratingHome": (context) => RatingHome(),
+        "/register": (context) => const RegisterPage(),
+        "/caretaker": (context) => const CaretakerCardPage(),
+        "/caretakerDetail": (context) => const CaretakerDetailPage(),
+        "/client-home": (context) => const ClientHome(),
+        "/caretaker-home": (context) => const CareTakerHome(),
+        "/login": (context) => const LoginPage(),
+        "/user-admin": (context) => const UserPage(),
         "/detail": (context) => const EditDetailPage(),
         "/menu-admin": (context) => const MenuPage(),
         "/news-admin": (context) => const NewsPage(),
         "/add-news": (context) => const AddNews(),
-        "/edit-news": (context) => const EditNews()
+        "/edit-news": (context) => const EditNews(),
+        "/ratingHome": (context) => RatingHome(),
       },
       home: FutureBuilder(
         future: StorageLocal.getUser(),
