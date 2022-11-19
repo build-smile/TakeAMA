@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:take_ama/pages/careTaker/setting.dart';
+import '../../services/RatingAPI.dart';
 import 'package:take_ama/pages/shared/newsFeed.dart';
 import 'myOrder.dart';
+import 'myOrderDetail.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CareTakerHome extends StatefulWidget {
   const CareTakerHome({super.key});
@@ -11,6 +14,7 @@ class CareTakerHome extends StatefulWidget {
 
 class _CareTakerHomeState extends State<CareTakerHome> {
   int _selectedIndex = 0;
+  double starrating = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     NewsFeed(),
     MyOrder(),
@@ -24,10 +28,39 @@ class _CareTakerHomeState extends State<CareTakerHome> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    getStartRating();
+    super.initState();
+  }
+  Future getStartRating() async {
+    starrating = await RatingAPI.getRating();
+    setState(() {
+
+    });
+  }
+
+  Future setRating() async{
+    await Navigator.pushNamed(context, "/ratingHome");
+    await getStartRating();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CareTaker'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onPressed: () {
+              setRating();
+            },
+          )
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

@@ -49,7 +49,7 @@ class OrderDetail {
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
         id: json["id"],
-        date: DateTime.parse(json["date"]),
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
         careTaker: json["careTaker"],
         hours: json["hours"],
         price: json["price"],
