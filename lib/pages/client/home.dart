@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/pages/client/caretakerCard.dart';
 import 'package:take_ama/pages/client/myCaretaker.dart';
+import 'package:take_ama/pages/shared/newsFeed.dart';
 import 'package:take_ama/utils/storageLocal.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -19,6 +20,7 @@ class _ClientHomeState extends State<ClientHome> {
   int pageIndex = 0;
   double starrating = 0;
   List<dynamic> pages = [
+    const NewsFeed(),
     const CaretakerCardPage(),
     const MyCareTaker(),
   ];
@@ -133,21 +135,28 @@ class _ClientHomeState extends State<ClientHome> {
                 _selectChange(0);
               },
               selected: pageIndex == 0,
-              leading: const Icon(Icons.search),
-              title: const Text('Find Caretaker'),
+              leading: Icon(Icons.newspaper),
+              title: Text('News'),
             ),
             ListTile(
               onTap: () {
                 _selectChange(1);
               },
               selected: pageIndex == 1,
-              leading: const Icon(Icons.my_library_books),
-              title: const Text('My Caretaker'),
+              leading: Icon(Icons.search),
+              title: Text('Find Caretaker'),
             ),
             ListTile(
+              onTap: () {
+                _selectChange(2);
+              },
               selected: pageIndex == 2,
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
+              leading: Icon(Icons.my_library_books),
+              title: Text('My Caretaker'),
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
               onTap: _logout,
             )
           ],

@@ -3,14 +3,14 @@ import 'package:take_ama/models/UserLogin.dart';
 import 'package:take_ama/services/UserAPI.dart';
 import 'package:take_ama/utils/storageLocal.dart';
 
-class AdminHomePage extends StatefulWidget {
-  const AdminHomePage({Key? key}) : super(key: key);
+class UserPage extends StatefulWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
-  State<AdminHomePage> createState() => _AdminHomePageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _AdminHomePageState extends State<AdminHomePage> {
+class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

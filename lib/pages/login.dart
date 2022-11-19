@@ -82,12 +82,13 @@ class _LoginPageState extends State<LoginPage> {
     if (_keyForm.currentState!.validate()) {
       _keyForm.currentState!.save();
       if (username.toLowerCase() == "admin") {
-        Navigator.pushNamedAndRemoveUntil(context, "/admin", (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/menu-admin", (route) => false);
+        return;
       }
       UserLogin? userLogin =
           await UserAPI.login(username: username, password: password);
       if (userLogin != null) {
-        //storageUser(userLogin);
         await StorageLocal.storageUser(userLogin);
         Alert.show(context: context, msg: userLogin.message!);
         if ('${userLogin.data!.userType}' == "1") {
