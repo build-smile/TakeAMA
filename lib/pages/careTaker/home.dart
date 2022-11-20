@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:take_ama/components/UserCountCard.dart';
 import 'package:take_ama/pages/careTaker/setting.dart';
 import '../../services/RatingAPI.dart';
 import 'package:take_ama/pages/shared/newsFeed.dart';
 import 'myOrder.dart';
-import 'myOrderDetail.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CareTakerHome extends StatefulWidget {
   const CareTakerHome({super.key});
@@ -33,14 +32,13 @@ class _CareTakerHomeState extends State<CareTakerHome> {
     getStartRating();
     super.initState();
   }
+
   Future getStartRating() async {
     starrating = await RatingAPI.getRating();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-  Future setRating() async{
+  Future setRating() async {
     await Navigator.pushNamed(context, "/ratingHome");
     await getStartRating();
   }
@@ -51,6 +49,7 @@ class _CareTakerHomeState extends State<CareTakerHome> {
       appBar: AppBar(
         title: const Text('CareTaker'),
         actions: <Widget>[
+          UserCountCard(),
           IconButton(
             icon: const Icon(
               Icons.star,
