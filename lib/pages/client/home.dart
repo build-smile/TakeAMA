@@ -6,6 +6,7 @@ import 'package:take_ama/pages/shared/newsFeed.dart';
 import 'package:take_ama/utils/storageLocal.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../components/UserCountCard.dart';
 import '../../services/RatingAPI.dart';
 
 class ClientHome extends StatefulWidget {
@@ -34,12 +35,10 @@ class _ClientHomeState extends State<ClientHome> {
 
   Future getStartRating() async {
     starrating = await RatingAPI.getRating();
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-  Future setRating() async{
+  Future setRating() async {
     await Navigator.pushNamed(context, "/ratingHome");
     await getStartRating();
   }
@@ -130,6 +129,7 @@ class _ClientHomeState extends State<ClientHome> {
             SizedBox(
               height: 20,
             ),
+            const UserCountCard(),
             ListTile(
               onTap: () {
                 _selectChange(0);

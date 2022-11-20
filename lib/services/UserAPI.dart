@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:take_ama/models/User.dart';
+import 'package:take_ama/models/UserCount.dart';
 import 'package:take_ama/models/UserLogin.dart';
 
 class UserAPI {
@@ -97,6 +98,20 @@ class UserAPI {
       return data;
     } else {
       return [];
+    }
+  }
+
+  static Future<UserCount?> getUserCount() async {
+    var urlApi = Uri.parse('$url/api/user/user_count.php');
+    final response = await http.get(urlApi, headers: {
+      'Content-Type': 'application/json',
+    });
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      UserCount? userCount = UserCount.fromJson(result);
+      return userCount;
+    } else {
+      return null;
     }
   }
 }
