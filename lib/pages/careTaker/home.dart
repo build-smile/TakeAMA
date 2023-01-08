@@ -3,6 +3,7 @@ import 'package:take_ama/components/UserCountCard.dart';
 import 'package:take_ama/pages/careTaker/setting.dart';
 import '../../services/RatingAPI.dart';
 import 'package:take_ama/pages/shared/newsFeed.dart';
+import '../../utils/storageLocal.dart';
 import 'myOrder.dart';
 
 class CareTakerHome extends StatefulWidget {
@@ -29,6 +30,7 @@ class _CareTakerHomeState extends State<CareTakerHome> {
   @override
   void initState() {
     // TODO: implement initState
+    StorageLocal.getUser();
     getStartRating();
     super.initState();
   }

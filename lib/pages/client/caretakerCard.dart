@@ -39,9 +39,7 @@ class _CaretakerCardPageState extends State<CaretakerCardPage> {
                         Expanded(
                           flex: 3,
                           child: Image.network(
-                            // caretaker.imgUrl,
                             images[index],
-                            //'https://i.pinimg.com/originals/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),

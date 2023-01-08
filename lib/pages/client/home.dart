@@ -29,6 +29,7 @@ class _ClientHomeState extends State<ClientHome> {
   @override
   void initState() {
     // TODO: implement initState
+    StorageLocal.getUser();
     getStartRating();
     super.initState();
   }

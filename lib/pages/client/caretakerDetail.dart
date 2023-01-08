@@ -5,6 +5,9 @@ import 'package:take_ama/pages/careTaker/myOrderDetail.dart';
 import 'package:take_ama/services/OrderAPI.dart';
 import 'package:take_ama/utils/storageLocal.dart';
 import 'package:take_ama/utils/validatefield.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:latlong2/latlong.dart';
 
 class CaretakerDetailPage extends StatefulWidget {
   const CaretakerDetailPage({Key? key}) : super(key: key);
@@ -17,6 +20,8 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
   var txtAmount = TextEditingController();
   var txtHours = TextEditingController();
   OrderDetail orderDetail = OrderDetail();
+  String location = 'Null, Press Button';
+  String Address = 'search';
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +88,8 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
                     orderDetail.price = txtAmount.text;
                     orderDetail.hours = txtHours.text;
                     orderDetail.careTaker = profile.id;
-
-                    createOrder();
-                    Navigator.pop(context);
+                    orderDetail.id = globalProfile!.id;
+                    onSelectLocation();
                   }
                 },
                 child: const Text("Confirm"),
@@ -97,7 +101,67 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
     );
   }
 
+  void onSelectLocation() async {
+    try {
+      Position _position = await _getGeoLocationPosition();
+      final result = await Navigator.pushNamed(context, '/selectlocation',
+          arguments: _position);
+      LatLng position_selected = result as LatLng;
+      orderDetail.amaLat =
+          double.parse(position_selected.latitude.toStringAsFixed(8));
+      orderDetail.amaLong =
+          double.parse(position_selected.longitude.toStringAsFixed(8));
+      createOrder();
+      Navigator.pop(context);
+    } catch (error) {
+      print(error);
+    }
+  }
+
   void createOrder() async {
     await OrderAPI.create(orderDetail, globalProfile!.id!);
+  }
+
+  Future<void> GetAddressFromLatLong(Position position) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    print(placemarks);
+    Placemark place = placemarks[0];
+    Address =
+        '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
+  }
+
+  Future<Position> _getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 }

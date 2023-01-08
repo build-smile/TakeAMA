@@ -157,15 +157,15 @@ class Memo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             child: Text(
               labelDetail,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -176,10 +176,10 @@ class Memo extends StatelessWidget {
             onSaved: (String? value) {
               user.detail = value!;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
-                  const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+                   EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
             ),
           ),
         ],

@@ -18,6 +18,8 @@ class OrderAPI {
         "hours": order.hours,
         "price": order.price,
         "amaId": amaId,
+        "amaLat": order.amaLat,
+        "amaLong": order.amaLong,
       }),
     );
     if (response.statusCode == 200) {

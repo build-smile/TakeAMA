@@ -37,6 +37,8 @@ class OrderDetail {
     this.price,
     this.amaName,
     this.orderStatus,
+    this.amaLat,
+    this.amaLong,
   });
 
   String? id;
@@ -46,6 +48,8 @@ class OrderDetail {
   String? price;
   String? amaName;
   String? orderStatus;
+  double? amaLat;
+  double? amaLong;
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
         id: json["id"],
@@ -55,6 +59,8 @@ class OrderDetail {
         price: json["price"],
         amaName: json["amaName"],
         orderStatus: json["orderStatus"],
+        amaLat: double.parse(json["amaLat"] ?? 0),
+        amaLong: double.parse(json["amaLong"] ?? 0),
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,5 +71,7 @@ class OrderDetail {
         "price": price,
         "amaName": amaName,
         "orderStatus": orderStatus,
+        "amaLat": amaLat,
+        "amaLong": amaLong,
       };
 }
