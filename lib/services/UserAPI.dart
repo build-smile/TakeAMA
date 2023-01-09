@@ -38,7 +38,8 @@ class UserAPI {
         "firstName": profile.firstName,
         "lastName": profile.lastName,
         "detail": profile.detail,
-        "birthDay": profile.birthDay
+        "birthDay": profile.birthDay,
+        "taxId": profile.taxId,
       }),
     );
     if (response.statusCode == 200) {

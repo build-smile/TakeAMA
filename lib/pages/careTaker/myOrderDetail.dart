@@ -56,30 +56,38 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Visibility(
-                      visible: order!.orderStatus == 'pending' &&
-                          globalProfile!.userType == '2',
-                      child: ElevatedButton(
-                        child: const Text('Accept'),
-                        onPressed: () {
-                          updateStatus("1", order!.id!);
-                        },
+                    SizedBox(width: 20,),
+                    Expanded(
+                      child: Visibility(
+                        visible: order!.orderStatus == 'pending' &&
+                            globalProfile!.userType == '2',
+                        child: ElevatedButton(
+                          child: const Text('Accept'),
+                          onPressed: () {
+                            updateStatus("1", order!.id!);
+                          },
+                        ),
                       ),
                     ),
-                    ElevatedButton(
+                    SizedBox(width: 20,),
+                    Expanded(
+                      child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.red),
                       child: const Text('Reject'),
                       onPressed: () {
                         updateStatus("9", order!.id!);
                       },
-                    ),
-                    ElevatedButton(
+                    ),),
+                    SizedBox(width: 20,),
+                    Expanded(
+                      child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.green),
                       child: const Text('Complete'),
                       onPressed: () {
                         updateStatus("2", order!.id!);
                       },
-                    ),
+                    ),),
+                    SizedBox(width: 20,),
                   ],
                 ),
                 FutureBuilder(
@@ -185,7 +193,7 @@ class _MyOrderDetailState extends State<MyOrderDetail>
     markers.add(ama_Marker);
 
     Widget controlmap = Container(
-        height: 500,
+        height: 600,
         child: Column(
           children: [
             Flexible(
@@ -207,13 +215,21 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Container(
                     width: 400,
                     padding: EdgeInsets.all(5),
-                    child: Text('Your Location : ${Address_Care}')),
+                    child: Text(
+                      'Your Location : ${Address_Care}',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
               ],
             ),
             Row(
@@ -221,13 +237,55 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                 Container(
                     width: 400,
                     padding: EdgeInsets.all(5),
-                    child: Text('Ama Location : ${Address_Ama}')),
+                    child: Text(
+                      'Ama Location : ${Address_Ama}',
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
               ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                OnResetfitBounds();
+              },
+              child: const Padding(
+                padding:  EdgeInsets.only(
+                  left: 30,
+                  right: 30,
+                  top: 10,
+                  bottom: 10,
+                ),
+                child: Icon(Icons.my_location),
+              ),
             ),
           ],
         ));
 
     return controlmap;
+  }
+
+  void OnResetfitBounds() {
+    final bounds = LatLngBounds();
+    LatLng? care_LatLng = LatLng(
+      _carePosition!.latitude,
+      _carePosition!.longitude,
+    );
+    LatLng? ama_LatLng = LatLng(
+      order!.amaLat!,
+      order!.amaLong!,
+    );
+
+    bounds.extend(care_LatLng);
+    bounds.extend(ama_LatLng);
+    _mapController.fitBounds(
+      bounds,
+      options: const FitBoundsOptions(
+        maxZoom: 12.5,
+        padding: EdgeInsets.only(left: 5, right: 5),
+      ),
+    );
   }
 
   Future<Position?> _getGeoLocationPosition() async {

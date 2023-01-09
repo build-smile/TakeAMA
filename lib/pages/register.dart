@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:take_ama/models/User.dart';
 import '../services/UserAPI.dart';
 import '../utils/SnackBarHelper.dart';
@@ -21,8 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   String labelEmail = "Email";
   String labelDetail = "About me";
   String labelBirthday = "Birthday (Year)";
+  String labelTaxID = "Tax ID.";
 
   var _keyform = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +56,20 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   labelText: labelLastName,
                   hintText: labelLastName,
+                ),
+              ),
+              TextFormField(
+                validator: ValidateField.validateString,
+                onSaved: (String? value) {
+                  user.taxId = value!;
+                },
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  LengthLimitingTextInputFormatter(13)
+                ],
+                decoration: InputDecoration(
+                  labelText: labelTaxID,
+                  hintText: labelTaxID,
                 ),
               ),
               TextFormField(
@@ -179,7 +196,7 @@ class Memo extends StatelessWidget {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
-                   EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+                  EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
             ),
           ),
         ],
@@ -192,6 +209,7 @@ enum SingingCharacter { customer, careTaker }
 
 class RadioUserType extends StatefulWidget {
   final Function submit;
+
   const RadioUserType({super.key, required this.submit});
 
   @override

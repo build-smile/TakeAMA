@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../models/UserLogin.dart';
 import '../../services/UserAPI.dart';
 import '../../utils/SnackBarHelper.dart';
@@ -19,6 +20,7 @@ class _EditDetailPageState extends State<EditDetailPage> {
   String labelEmail = "Email";
   String labelDetail = "About me";
   String labelBirthday = "Birthday (Year)";
+  String labelTaxID = "Tax ID.";
 
   var _keyform = GlobalKey<FormState>();
   @override
@@ -54,6 +56,21 @@ class _EditDetailPageState extends State<EditDetailPage> {
                 decoration: InputDecoration(
                   labelText: labelLastName,
                   hintText: labelLastName,
+                ),
+              ),
+              TextFormField(
+                initialValue: profile.taxId,
+                validator: ValidateField.validateString,
+                onSaved: (String? value) {
+                  profile.taxId = value!;
+                },
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  LengthLimitingTextInputFormatter(13)
+                ],
+                decoration: InputDecoration(
+                  labelText: labelTaxID,
+                  hintText: labelTaxID,
                 ),
               ),
               TextFormField(

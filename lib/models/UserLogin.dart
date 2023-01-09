@@ -35,6 +35,7 @@ class Profile {
     this.lastName,
     this.birthDay,
     this.isActive,
+    this.taxId,
   });
 
   String? id;
@@ -46,6 +47,7 @@ class Profile {
   String? lastName;
   String? birthDay;
   String? isActive;
+  String? taxId;
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
         id: json["id"],
@@ -57,6 +59,7 @@ class Profile {
         lastName: json["lastName"],
         birthDay: json["birthDay"],
         isActive: json["isActive"],
+        taxId: json["taxId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -68,5 +71,6 @@ class Profile {
         "lastName": lastName,
         "birthDay": birthDay,
         "isActive": isActive,
+        "taxId": taxId,
       };
 }

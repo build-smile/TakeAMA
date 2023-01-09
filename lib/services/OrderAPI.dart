@@ -50,17 +50,21 @@ class OrderAPI {
 
   static Future<OrderDetail?> getById(
       {required String id, String userType = '2'}) async {
-    var urlRegister = Uri.parse(
-        '$url/api/order/read_single.php?userType=$userType&userId=$id');
-    var response = await http.get(
-      urlRegister,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
-    if (response.statusCode == 200) {
-      final result = jsonDecode(response.body);
-      return OrderDetail.fromJson(result);
+    try {
+      var urlRegister = Uri.parse(
+          '$url/api/order/read_single.php?userType=$userType&userId=$id');
+      var response = await http.get(
+        urlRegister,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final result = jsonDecode(response.body);
+        return OrderDetail.fromJson(result);
+      }
+    } catch (error) {
+      print(error);
     }
     return null;
   }

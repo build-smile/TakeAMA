@@ -18,6 +18,7 @@ class User {
     this.lastName = "",
     this.detail = "",
     this.birthDay = 0,
+    this.taxId = "",
   });
 
   String username;
@@ -28,6 +29,7 @@ class User {
   String lastName;
   String detail;
   int birthDay;
+  String taxId;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         username: json["username"],
@@ -38,6 +40,7 @@ class User {
         lastName: json["lastName"],
         detail: json["detail"],
         birthDay: json["birthDay"],
+        taxId: json["taxId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class User {
         "lastName": lastName,
         "detail": detail,
         "birthDay": birthDay,
+        "taxId": taxId,
       };
 }
