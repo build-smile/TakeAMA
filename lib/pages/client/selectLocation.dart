@@ -121,7 +121,7 @@ class _SelectLocationState extends State<SelectLocation>
       body: Center(
           child: FutureBuilder(
         future: onGetCurrentLocation(),
-        builder: (BuildContext context, AsyncSnapshot<Position?> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Position?> snapshot,) {
           if (snapshot.hasData) {
             return Container(
                 child: Column(

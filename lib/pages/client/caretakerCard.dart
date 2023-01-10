@@ -12,11 +12,13 @@ class CaretakerCardPage extends StatefulWidget {
 
 class _CaretakerCardPageState extends State<CaretakerCardPage> {
   var images = [
-    'https://media.istockphoto.com/photos/headshot-portrait-of-smiling-male-employee-in-office-picture-id1309328823?b=1&k=20&m=1309328823&s=170667a&w=0&h=a-f8vR5TDFnkMY5poQXfQhDSnK1iImIfgVTVpFZi_KU=',
-    'https://media.istockphoto.com/photos/headshot-portrait-of-smiling-ethnic-businessman-in-office-picture-id1300512215?b=1&k=20&m=1300512215&s=612x612&w=0&h=pP5ksvhx-gIHFVAyZTn31H_oJuhB0nX4HnLLUN2kVAg=',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7vAgLQ-YG784iOrvDMDtO-Spf37R7gN09hixLwEmKwmyiduiH5a2INoHI6sWTflRpEv0&usqp=CAU',
-    'https://i.pinimg.com/originals/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg'
+    'https://img.freepik.com/free-photo/young-asian-woman-with-winning-gestere-isolated-white-wall_231208-1136.jpg?w=740&t=st=1671357890~exp=1671358490~hmac=b0575341ef258910038046cdeb7f8e94d1de83c6633eac48f7a06e58518e9c8b',
+    'https://img.freepik.com/free-photo/portrait-young-asia-lady-with-positive-expression-arms-crossed-smile-broadly-dressed-casual-clothing-looking-camera-pink-background_7861-3201.jpg?w=1380&t=st=1671357326~exp=1671357926~hmac=4a67b0b4bf08fb4f1607de8312a97e55649165bdf7ecb89d89b621b7cf822d1f',
+    'https://img.freepik  .com/free-photo/happy-young-asian-male-feeling-happy-smiling-looking-front-while-relaxing-kitchen-home_7861-2875.jpg?w=1380&t=st=1671357385~exp=1671357985~hmac=bfe8c72e46a990bbe187c7022abaaad9dd8e95683ecaf9b6f69398d1611800c7',
+    'https://img.freepik.com/free-photo/smiling-asian-man-using-tablet-computer_1262-18324.jpg?w=1380&t=st=1671357214~exp=1671357814~hmac=cb7af27a22f8c061e3123a09bcf8474618addb931e98b61eac3b2f7af3f0ebe1',
+    'https://img.freepik.com/free-photo/smart-attractive-asian-glasses-male-standing-smile-with-freshness-joyful-casual-blue-shirt-portrait-white-background_609648-1226.jpg?w=740&t=st=1671356994~exp=1671357594~hmac=e88ff1c51915d078e9fa1b0b4641e7fbaf35dfad3ea636b6bb84bce3e271d415',
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,10 +92,8 @@ class _CaretakerCardPageState extends State<CaretakerCardPage> {
     List<String> imgs = [];
     int v = 0;
     for (int i = 0; i < length; i++) {
-      if (i == images.length - 1) {
-        v = 0;
-      }
       imgs.add(images[v]);
+      if (i == images.length - 1) v = 0;
       v++;
     }
     return imgs;

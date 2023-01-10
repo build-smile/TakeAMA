@@ -35,17 +35,13 @@ class _MyOrderDetailState extends State<MyOrderDetail>
     super.initState();
   }
 
-  Future<OrderDetail?> onGetCurrentLocation() async {
-    order = await ModalRoute.of(context)!.settings.arguments as OrderDetail;
-    return order;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Status')),
       body: FutureBuilder(
-        future: onGetCurrentLocation(),
+        future: onGetOrderDetails(),
         builder: (
           BuildContext context,
           AsyncSnapshot<OrderDetail?> snapshot,
@@ -93,9 +89,9 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                 FutureBuilder(
                   future: initMap(),
                   builder: (
-                    BuildContext context,
-                    AsyncSnapshot<LatLng?> snapshot,
-                  ) {
+                      BuildContext context,
+                      AsyncSnapshot<LatLng?> snapshot,
+                      ) {
                     if (snapshot.hasData) {
                       return OnsetMap();
                     }
@@ -132,6 +128,11 @@ class _MyOrderDetailState extends State<MyOrderDetail>
         },
       ),
     );
+  }
+
+  Future<OrderDetail?> onGetOrderDetails() async {
+    order = await ModalRoute.of(context)!.settings.arguments as OrderDetail;
+    return order;
   }
 
   Future<LatLng?> initMap() async {
@@ -172,7 +173,6 @@ class _MyOrderDetailState extends State<MyOrderDetail>
       height: 50,
       point: care_LatLng,
       builder: (ctx) => Container(
-        key: const Key('blue'),
         child: const Icon(
           size: 50,
           Icons.location_pin,
@@ -192,7 +192,7 @@ class _MyOrderDetailState extends State<MyOrderDetail>
     markers.add(care_Marker);
     markers.add(ama_Marker);
 
-    Widget controlmap = Container(
+    return Container(
         height: 600,
         child: Column(
           children: [
@@ -208,14 +208,14 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                 children: [
                   TileLayer(
                     urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                   ),
                   MarkerLayer(markers: markers),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -225,7 +225,7 @@ class _MyOrderDetailState extends State<MyOrderDetail>
                     padding: EdgeInsets.all(5),
                     child: Text(
                       'Your Location : ${Address_Care}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
                       ),
@@ -262,8 +262,6 @@ class _MyOrderDetailState extends State<MyOrderDetail>
             ),
           ],
         ));
-
-    return controlmap;
   }
 
   void OnResetfitBounds() {
@@ -282,7 +280,7 @@ class _MyOrderDetailState extends State<MyOrderDetail>
     _mapController.fitBounds(
       bounds,
       options: const FitBoundsOptions(
-        maxZoom: 12.5,
+        maxZoom: 16.2,
         padding: EdgeInsets.only(left: 5, right: 5),
       ),
     );

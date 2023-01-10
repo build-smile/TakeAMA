@@ -106,6 +106,7 @@ class _CaretakerDetailPageState extends State<CaretakerDetailPage> {
       Position _position = await _getGeoLocationPosition();
       final result = await Navigator.pushNamed(context, '/selectlocation',
           arguments: _position);
+
       LatLng position_selected = result as LatLng;
       orderDetail.amaLat =
           double.parse(position_selected.latitude.toStringAsFixed(8));

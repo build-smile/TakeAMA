@@ -67,15 +67,19 @@ class NewsAPI {
   }
 
   static Future<List<News?>> getAll() async {
-    var urlApi = Uri.parse('$url/api/news/read.php');
-    final response = await http.get(urlApi, headers: {
-      'Content-Type': 'application/json',
-    });
-    if (response.statusCode == 200) {
-      final List result = jsonDecode(response.body)["data"];
-      List<News> data = result.map((p) => News.fromJson(p)).toList();
-      return data;
-    } else {
+    try {
+      var urlApi = Uri.parse('$url/api/news/read.php');
+      final response = await http.get(urlApi, headers: {
+        'Content-Type': 'application/json',
+      });
+      if (response.statusCode == 200) {
+        final List result = jsonDecode(response.body)["data"];
+        List<News> data = result.map((p) => News.fromJson(p)).toList();
+        return data;
+      } else {
+        return [];
+      }
+    } catch (error) {
       return [];
     }
   }

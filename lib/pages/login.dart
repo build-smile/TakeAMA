@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             margin: EdgeInsets.all(50),
             width: 150,
             height: 150,
-            child: Image.asset("assets/images/disabled.png"),
+            child: Image.asset("assets/images/TakeAMALogo.png"),
           ),
           SizedBox(
             height: 20,

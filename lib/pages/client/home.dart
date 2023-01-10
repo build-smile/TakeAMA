@@ -44,6 +44,10 @@ class _ClientHomeState extends State<ClientHome> {
     await getStartRating();
   }
 
+  Future pushtoChatBot() async {
+    await Navigator.pushNamed(context, "/mychatbot");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,6 +158,13 @@ class _ClientHomeState extends State<ClientHome> {
               selected: pageIndex == 2,
               leading: Icon(Icons.my_library_books),
               title: Text('My Caretaker'),
+            ),
+            ListTile(
+              onTap: () {
+                pushtoChatBot();
+              },
+              leading: Icon(Icons.chat),
+              title: Text('Chat bot'),
             ),
             ListTile(
               leading: Icon(Icons.logout),

@@ -53,6 +53,10 @@ dev_dependencies:
   location: ^4.4.0
   geolocator: ^9.0.2
   geocoding: ^2.0.5
+  cupertino_icons: ^1.0.2
+  dialog_flowtter: ^0.3.1
+  google_fonts: ^2.1.0
+  hexcolor: ^2.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

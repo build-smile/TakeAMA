@@ -10,6 +10,7 @@ import 'package:take_ama/pages/careTaker/home.dart';
 import 'package:take_ama/pages/careTaker/myOrderDetail.dart';
 import 'package:take_ama/pages/client/caretakerCard.dart';
 import 'package:take_ama/pages/client/caretakerDetail.dart';
+import 'package:take_ama/pages/client/clientChatbot.dart';
 import 'package:take_ama/pages/client/home.dart';
 import 'package:take_ama/pages/client/selectLocation.dart';
 import 'package:take_ama/pages/login.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         "/register": (context) => const RegisterPage(),
         "/caretaker": (context) => const CaretakerCardPage(),
@@ -43,6 +45,7 @@ class MyApp extends StatelessWidget {
         "/ratingHome": (context) =>const RatingHome(),
         "/selectlocation": (context) => const SelectLocation(),
         "/myOrderDetail": (context) => const MyOrderDetail(),
+        "/mychatbot": (context) => clientChatbot(),
       },
       home: FutureBuilder(
         future: StorageLocal.getUser(),
